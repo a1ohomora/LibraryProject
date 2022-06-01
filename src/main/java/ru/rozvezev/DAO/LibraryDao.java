@@ -89,9 +89,20 @@ public class LibraryDao {
         jdbcTemplate.update(sqlQuery, bookId);
     }
 
-    public void setBookHolder(int bookId, Integer personID) {
+    public Optional<Person> getBookOwner(int bookId) {
+        String sqlQuery = "select p.* from book join person p on p.person_id = book.person_id where book_id=?";
+        return jdbcTemplate.queryForStream(sqlQuery, personPropertyMapper, bookId).findAny();
+
+    }
+
+    public void release(int bookId) {
+        String sqlQuery = "update book set person_id=null where book_id=?";
+        jdbcTemplate.update(sqlQuery, bookId);
+    }
+
+    public void assign(int bookId, int personId) {
         String sqlQuery = "update book set person_id=? where book_id=?";
-        jdbcTemplate.update(sqlQuery, personID, bookId);
+        jdbcTemplate.update(sqlQuery, personId, bookId);
     }
 
     //Join query

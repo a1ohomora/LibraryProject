@@ -7,7 +7,7 @@ public class Book {
 
     private int bookId;
 
-    private Integer personId;
+    //private Integer personId;
 
     @NotNull
     @Size(min = 1, max = 100, message = "Name length should be between 1 and 100")
@@ -20,9 +20,7 @@ public class Book {
 
     public Book() {}
 
-    public Book(int bookId, int personId, String name, String author, int year) {
-        this.bookId = bookId;
-        this.personId = personId;
+    public Book(String name, String author, int year) {
         this.name = name;
         this.author = author;
         this.year = year;
@@ -37,14 +35,6 @@ public class Book {
 
     public void setBookId(int bookId) {
         this.bookId = bookId;
-    }
-
-    public Integer getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
     }
 
     public String getName() {

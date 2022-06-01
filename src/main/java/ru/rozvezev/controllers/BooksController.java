@@ -7,9 +7,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.rozvezev.DAO.LibraryDao;
 import ru.rozvezev.models.Book;
+import ru.rozvezev.models.Person;
 import ru.rozvezev.util.BookValidator;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 
 @Controller
@@ -47,11 +49,13 @@ public class BooksController {
     }
 
     @GetMapping("/{bookId}")
-    public String showBook(@PathVariable("bookId") int bookId, Model model){
+    public String showBook(@PathVariable("bookId") int bookId, Model model, @ModelAttribute("person") Person person){
         Book book = libraryDAO.getBookById(bookId);
         model.addAttribute("book", book);
-        if (book.getPersonId() != null){
-            model.addAttribute("person", libraryDAO.getPersonById(book.getPersonId()));
+
+        Optional<Person> bookOwner = libraryDAO.getBookOwner(bookId);
+        if (bookOwner.isPresent()){
+            model.addAttribute("owner", bookOwner.get());
         } else {
             model.addAttribute("persons", libraryDAO.getPersonList());
         }
@@ -75,12 +79,16 @@ public class BooksController {
         return "redirect:/books/" + bookId;
     }
 
-    /*
-     *TODO: replace PutMapping(/{bookId}) with PatchMapping(/{bookId}/set-book-holder)
-     */
-    @PutMapping("/{bookId}")
-    public String setBookHolder(@PathVariable("bookId") int bookId, @ModelAttribute("book") Book book){
-        libraryDAO.setBookHolder(bookId, book.getPersonId());
+
+    @PatchMapping("/{bookId}/release")
+    public String release(@PathVariable("bookId") int bookId){
+        libraryDAO.release(bookId);
+        return "redirect:/books/" + bookId;
+    }
+
+    @PatchMapping("/{bookId}/assign")
+    public String assign(@PathVariable("bookId") int bookId, @ModelAttribute("person") Person person){
+        libraryDAO.assign(bookId, person.getPersonId());
         return "redirect:/books/" + bookId;
     }
 

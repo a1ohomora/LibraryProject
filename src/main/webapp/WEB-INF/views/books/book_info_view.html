@@ -21,23 +21,30 @@
     <div class=" w3-block w3-cursive w3-center my-text">
         <div th:text="${'- ID: ' + book.getBookId()}">book id</div>
         <div th:text="${'- Name: ' + book.getName()}">book name</div>
+        <div th:text="${'- Author: ' + book.getAuthor()}">book author</div>
         <div th:text="${'- Year: ' + book.getYear()}">book year</div>
         <hr>
-        <form th:if="${persons} != null" th:method="PUT" th:action="@{/books/{bookId}(bookId=${book.getBookId()})}">
-            <div th:text="'The book is free. Appoint to somebody ?'"/>
-            <label for="personList"> Choose a person: </label>
-            <select th:object="${book}" th:field="*{personId}" id="personList">
-                <option th:each="p : ${persons}" th:value="${p.getPersonId()}"
-                        th:text="${p.getFullName()}">Person Name</option>
-            </select>
 
-            <input class="w3-button w3-light-gray" type="submit" value="confirm">
-        </form>
-        <div th:if="${persons} == null" th:text="${person.getFullName()} + ' has the book now'"/>
-        <form th:if="${persons} == null" th:method="PUT" th:action="@{/books/{bookId}(bookId=${book.getBookId()})}"
-              th:object="${book}" th:field="*{personId}">
-            <input class="w3-button w3-light-gray" type="submit" value="release">
-        </form>
+        <div th:if="${owner}">
+            <form th:method="PATCH" th:action="@{/books/{bookId}/release(bookId=${book.getBookId()})}">
+                <label th:text="'&quot;' + ${owner.getFullName()} + '&quot;' + ' has the book now'"></label>
+                <br>
+                <input class="w3-button w3-light-gray" type="submit" value="release">
+            </form>
+        </div>
+
+        <div th:if="${persons}">
+            <span>The book is free. Appoint to somebody ?</span>
+            <br>
+            <form th:method="PATCH" th:action="@{/books/{bookId}/assign(bookId=${book.getBookId()})}">
+                <label for="personList"> Choose a person: </label>
+                <select th:object="${person}" th:field="*{personId}" id="personList">
+                    <option th:each="p : ${persons}" th:value="${p.getPersonId()}"
+                            th:text="${p.getFullName()}">Person Name</option>
+                </select>
+                <input class="w3-button w3-light-gray" type="submit" value="confirm">
+            </form>
+        </div>
     </div>
 </body>
 

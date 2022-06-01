@@ -22,12 +22,17 @@
         <div th:text="${'- ID: ' + person.getPersonId()}">person id</div>
         <div th:text="${'- Name: ' + person.getFullName()}">person name</div>
         <div th:text="${'- Bith year: ' + person.getBirthYear()}">person birth year</div>
-        <hr>
-        <div th:if="${books.size()} == 0">The person have not taken books yet</div>
 
-        <div th:unless="${books.size()} == 0" th:text="'Taken books:'"/>
-        <div th:unless="${books.size()} == 0" th:each="book : ${books}">
-            <div th:text="${book.getName()} + ', ' + ${book.getYear()}">details</div>
+        <hr>
+
+        <div th:if="${books.isEmpty()}">The person have not taken books yet</div>
+
+        <div th:if="${!books.isEmpty()}">
+            <span>Taken books:</span>
+            <br>
+            <table th:each="book : ${books}">
+                <tr th:text="${book.getName()} + ', ' + ${book.getYear()}">details</tr>
+            </table>
         </div>
     </div>
 </body>
