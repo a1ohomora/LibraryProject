@@ -1,4 +1,4 @@
-# SpringMVCApp
+# Library app
 
 <div>-Simple Spring CRUD webapp (without SpringBoot).</div>
 <div>-Database PostgreSQL (connection through JdbcTemplate)</div>
