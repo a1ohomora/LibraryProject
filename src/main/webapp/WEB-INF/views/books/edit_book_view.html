@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit book</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+    <style>
+        .my-header{
+            font-size:50px;
+        }
+        .my-text{
+            font-size:30px;
+        }
+        .err-text{
+            font-size:20px;
+            color: firebrick;
+        }
+    </style>
+</head>
+
+<body class="w3-content w3-blue-gray" style="max-width:1300px">
+<div class="my-header">
+    <h1>EDIT BOOK</h1>
+</div>
+<div class="w3-cursive w3-center my-text">
+    <form class="w3-padding-small" th:method="PATCH" th:action="@{/books/{bookId}(bookId=${book.getBookId()})}" th:object="${book}">
+        <label for="name">Enter name: </label>
+        <input type="text" th:field="*{name}" id="name" size="20">
+        <div class="err-text" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        <div class="w3-padding-small"></div>
+
+        <label for="author">Enter author: </label>
+        <input type="text" th:field="*{author}" id="author" size="20">
+        <div class="err-text" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
+        <div class="w3-padding-small"></div>
+
+        <label for="year">Enter year: </label>
+        <input type="text" th:field="*{year}" id="year" size="20">
+        <div class="err-text" th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></div>
+        <div class="w3-padding-small"></div>
+
+        <input class="w3-button w3-light-gray" type="submit" value="edit">
+    </form>
+</div>
+</body>
+</html>

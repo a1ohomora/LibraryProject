@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Person creating</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+    <style>
+        .my-header{
+            font-size:50px;
+        }
+        .my-text{
+            font-size:30px;
+        }
+        .err-text{
+            font-size:20px;
+            color: firebrick;
+        }
+    </style>
+</head>
+
+<body class="w3-content w3-blue-gray" style="max-width:1300px">
+    <div class="my-header">
+        <h1>CREATE PERSON</h1>
+    </div>
+    <div class="w3-cursive w3-center my-text">
+        <form class="w3-padding-small" th:method="POST" th:action="@{/persons}" th:object="${person}">
+            <label for="name">Enter full name: </label>
+            <input type="text" th:field="*{fullName}" id="name" size="20">
+            <div class="err-text" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">error message</div>
+            <div class="w3-padding-small"></div>
+
+            <label for="age">Enter birth year: </label>
+            <input type="text" th:field="*{birthYear}" id="age" size="20">
+            <div class="err-text" th:if="${#fields.hasErrors('birthYear')}" th:errors="*{birthYear}">error message</div>
+            <div class="w3-padding-small"></div>
+
+            <input class="w3-button w3-light-gray" type="submit" value="create">
+        </form>
+    </div>
+</body>
+</html>

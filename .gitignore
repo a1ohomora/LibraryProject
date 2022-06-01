@@ -1,0 +1,11 @@
+## gitignore template from StackOverFlow
+
+out/
+.idea/
+.idea_modules/
+*.iml
+*.ipr
+*.iws
+# Project exclude paths
+/target/
+/src/main/resources/database.properties

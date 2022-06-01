@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>People</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .my-header{
+            font-size:50px;
+        }
+        .my-text{
+            font-size:30px;
+        }
+    </style>
+</head>
+
+<body class="w3-content w3-blue-gray " style="max-width:1300px">
+    <div class="my-header">
+        <h1>PEOPLE LIST</h1>
+    </div>
+    <div class="w3-container w3-center my-text">
+        <div class="w3-hover-light-gray w3-cursive" th:each="person : ${persons}">
+            <a style="text-decoration:none" th:href="@{/persons/{personId}(personId=${person.getPersonId()})}"
+               th:text="${person.getFullName() + ', ' + person.getBirthYear()}">person</a>
+        </div>
+    </div>
+</body>
+
+<footer class="w3-right-align w3-blue-gray w3-padding-16 my-text">
+    <a class="w3-button w3-hover-orange" style="text-decoration:none" href="/persons/new">Create a person</a>
+</footer>
+</html>

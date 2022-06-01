@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Person info</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+    <style>
+        .my-text{
+            font-size:30px;
+        }
+    </style>
+</head>
+
+<body class="w3-content w3-blue-gray" style="max-width:1300px">
+    <div class="my-header">
+        <h1>PERSONAL INFO</h1>
+    </div>
+    <div class=" w3-block w3-cursive w3-center my-text">
+        <div th:text="${'- ID: ' + person.getPersonId()}">person id</div>
+        <div th:text="${'- Name: ' + person.getFullName()}">person name</div>
+        <div th:text="${'- Bith year: ' + person.getBirthYear()}">person birth year</div>
+        <hr>
+        <div th:if="${books.size()} == 0">The person have not taken books yet</div>
+
+        <div th:unless="${books.size()} == 0" th:text="'Taken books:'"/>
+        <div th:unless="${books.size()} == 0" th:each="book : ${books}">
+            <div th:text="${book.getName()} + ', ' + ${book.getYear()}">details</div>
+        </div>
+    </div>
+</body>
+
+<footer class="w3-right-align w3-blue-gray w3-padding-16 my-text">
+    <a class="w3-button w3-hover-orange" style="text-decoration:none"
+       th:href="@{/persons/{personId}/edit(personId=${person.getPersonId()})}">Edit person</a>
+    <div class="w3-padding-small"></div>
+    <form th:method="DELETE" th:action="@{/persons/{personId}(personId=${person.getPersonId()})}">
+        <input class="w3-button w3-hover-orange" type="submit" value="Delete">
+    </form>
+</footer>
+
+</html>
+
