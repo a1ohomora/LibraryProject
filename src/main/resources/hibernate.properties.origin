@@ -1,0 +1,9 @@
+### Connection settings ###
+hibernate.connection.driver_class=
+hibernate.connection.url=
+hibernate.connection.username=
+hibernate.connection.password=
+
+### Hibernate settings ###
+hibernate.dialect=
+hibernate.show_sql=

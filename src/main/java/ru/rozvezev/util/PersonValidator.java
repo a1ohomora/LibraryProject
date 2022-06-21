@@ -6,19 +6,19 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.rozvezev.DAO.LibraryDao;
 import ru.rozvezev.models.Person;
+import ru.rozvezev.service.PeopleService;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Optional;
 
 @Component
 public class PersonValidator implements Validator {
 
-    private final LibraryDao libraryDao;
+    private final PeopleService peopleService;
 
     @Autowired
-    public PersonValidator(LibraryDao libraryDao) {
-        this.libraryDao = libraryDao;
+    public PersonValidator( PeopleService peopleService) {
+        this.peopleService = peopleService;
     }
 
     //Define which classes will be validated.
@@ -30,7 +30,7 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Person target = (Person) o;
-        Optional<Person> personFromDB = libraryDao.getPersonByFullName(target.getFullName());
+        Optional<Person> personFromDB = peopleService.getPersonByFullName(target.getFullName());
 
         //Validate if the entered year < current year.
         if (target.getBirthYear() > Calendar.getInstance().get(Calendar.YEAR))

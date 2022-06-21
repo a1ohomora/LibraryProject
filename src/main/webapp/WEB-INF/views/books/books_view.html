@@ -27,9 +27,25 @@
                th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</a>
         </div>
     </div>
+
+    <br>
+
+    <div th:if="${pageRequest}">
+        <a class="w3-button w3-hover-orange my-text" style="text-decoration:none"
+           th:href="@{/books(page=${pageRequest.previousOrFirst().getPageNumber()}, books_per_page=${pageRequest.getPageSize()})}">Previous page</a>
+    </div>
+
+    <div th:if="${pageRequest}">
+        <a class="w3-button w3-hover-orange my-text" style="text-decoration:none"
+           th:href="@{/books(page=${books.size() < pageRequest.getPageSize()}
+                                    ? ${pageRequest.getPageNumber()}
+                                    : ${pageRequest.getPageNumber() + 1},
+           books_per_page=${pageRequest.getPageSize()})}">Next page</a>
+    </div>
 </body>
 
 <footer class="w3-right-align w3-blue-gray w3-padding-16 my-text">
+    <a class="w3-button w3-hover-orange" style="text-decoration:none" href="/books/search">Search book</a>
     <a class="w3-button w3-hover-orange" style="text-decoration:none" href="/books/new">Create a book</a>
 </footer>
 

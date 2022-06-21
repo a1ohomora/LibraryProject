@@ -5,16 +5,17 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.rozvezev.DAO.LibraryDao;
 import ru.rozvezev.models.Book;
+import ru.rozvezev.service.BooksService;
 
 import java.util.Calendar;
 
 @Component
 public class BookValidator implements Validator {
 
-    private final LibraryDao libraryDao;
+    private final BooksService booksService;
 
-    public BookValidator(LibraryDao libraryDao) {
-        this.libraryDao = libraryDao;
+    public BookValidator(BooksService booksService) {
+        this.booksService = booksService;
     }
 
     //Define which classes will be validated.

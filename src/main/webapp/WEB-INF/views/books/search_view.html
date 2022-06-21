@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search the book</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .my-header{
+            font-size:50px;
+        }
+        .my-text{
+            font-size:30px;
+        }
+    </style>
+</head>
+
+<body class="w3-content w3-blue-gray " style="max-width:1300px">
+    <div class="my-header">
+        <h1>SEARCH THE BOOK</h1>
+    </div>
+    <form th:action="@{/books/search}" method="POST">
+        <label for="search_field">Enter start of book name: </label>
+        <input type="text" id="search_field" name="starting_with"/>
+
+        <input type="submit" value="Search"/>
+    </form>
+
+    <br>
+
+    <div th:if="${books.isEmpty()}">
+        <div>Not found.</div>
+    </div>
+
+    <div th:if="${!books.isEmpty()}">
+        <div class="w3-padding-small" th:each="book : ${books}">
+            <a style="text-decoration:none" class="w3-hover-light-gray" th:href="@{/books/{id}(id=${book.getBookId()})}"
+               th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}"/>
+
+            <div th:text="${book.getOwner() == null ? 'The book is free': ('Owner is ' + book.getOwner().fullName)}"/>
+        </div>
+    </div>
+</body>
+
+<footer class="w3-right-align w3-blue-gray w3-padding-16 my-text">
+
+</footer>
+
+</html>

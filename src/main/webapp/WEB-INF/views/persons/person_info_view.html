@@ -11,6 +11,9 @@
         .my-text{
             font-size:30px;
         }
+        .expired-text{
+            color: firebrick;
+        }
     </style>
 </head>
 
@@ -30,9 +33,10 @@
         <div th:if="${!books.isEmpty()}">
             <span>Taken books:</span>
             <br>
-            <table th:each="book : ${books}">
-                <tr th:text="${book.getName()} + ', ' + ${book.getYear()}">details</tr>
-            </table>
+            <div th:each="book : ${books}">
+                <div th:style="${book.isExpired() ? 'color : firebrick' : 'color : white'}"
+                    th:text="${book.getName()} + ', ' + ${book.getYear()}">details</div>
+            </div>
         </div>
     </div>
 </body>
