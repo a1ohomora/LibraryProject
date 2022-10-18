@@ -1,8 +1,22 @@
 # Library app
 
-<div>-Spring CRUD webapp for library accounting.</div>
-<div>-Database PostgreSQL (connection through Hibernate)</div>
-<p></p>
-<div>In order to run the application on your host, you need to create a file <i>hibernate.properties</i> in folder 
-<i>/src/main/resources/</i> with data for connecting to your database (property file template - file <i>hibernate.properties.origin</i>
-in the same directory)</div>
+<div><b>Приложение для учёта книг в библиотеке.</b>
+    <div>-Возможности: 
+      <div>-Регистрировать людей в БД</div> 
+      <div>-Добавлять и убирать книги на их имя</div> 
+      <div>-Смотреть просрочена ли книга у пользователя библиотеки</div>
+    </div>
+    <br>
+    <div>-Конфигурация:war-file, database PostgreSQL, JPA provider - Hibernate.</div>
+    <br>
+    -Можно выдать пользователю роль ADMIN, тогда у него появится возможность перейти на страницу /admin, где видно всех зарегистрированных пользователей.
+    <br>
+    <br>
+    <div><b>Скриншоты страниц: </b></div>
+    <div>Страница регистрации пользователей</div>
+    <img src="src/main/webapp/resources/static/persons.jpg" alt="persons">
+    <div>Страница всех книг в библиотеке</div>
+    <img src="src/main/webapp/resources/static/books.jpg" alt="books">
+    <div>Страница поиска книг</div>
+    <img src="src/main/webapp/resources/static/search.jpg" alt="search">
+</div>
